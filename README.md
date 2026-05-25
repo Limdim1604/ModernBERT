@@ -79,10 +79,18 @@ Metric được sử dụng cho MNLI, QNLI, RTE và ANLI là **accuracy**.
 
 Paper không công bố batch size trong Table 6, nên batch size được điều chỉnh theo tài nguyên GPU khi chạy trên Kaggle.
 
+Đối với GLUE:
 | Mô hình | Train batch size |
 |---|---:|
 | ModernBERT-base | 16 |
-| ModernBERT-large | 4 |
+| ModernBERT-large MNLI | 4 |
+| ModernBERT-large RTE | 8 |
+
+Đối với ANLI Round 1:
+| Thiết lập | Train batch size | Gradient accumulation |
+|---|---:|---:|
+| Base / Base + MNLI checkpoint | 8 | 4 |
+| Large / Large + MNLI checkpoint | 8 | 4 |
 
 Với ModernBERT-large, do mô hình lớn hơn và tốn VRAM hơn, batch size được giảm xuống 4 để tránh lỗi CUDA out of memory. Trong một số trường hợp, có thể dùng thêm gradient accumulation để tăng effective batch size mà không vượt quá giới hạn bộ nhớ GPU.
 
